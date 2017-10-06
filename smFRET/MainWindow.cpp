@@ -2,10 +2,20 @@
 #include <QDialog>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include<QPixmap>
+#include<QFileDialog>
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
+	creatframe();
+}
+
+void MainWindow::creatframe(void)
+{
+	QImage defaultimg("default.png");
 	QWidget *cenwid = new QWidget(this);
+
+
 	title = new QLabel;
 	title->setText("FRET");
 	ch1_title = new QLabel;
@@ -15,7 +25,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 	ch1 = new QLabel;
 	ch2 = new QLabel;
-	
+	ch1->resize(256, 512);
+	ch1->setPixmap(QPixmap::fromImage(defaultimg));
+	ch2->resize(256, 512);
+	ch2->setPixmap(QPixmap::fromImage(defaultimg));
+
 
 	QVBoxLayout *ch1_win = new QVBoxLayout;
 	ch1_win->addWidget(ch1_title);
@@ -26,8 +40,6 @@ MainWindow::MainWindow(QWidget *parent)
 	QHBoxLayout *fret_win = new QHBoxLayout;
 	fret_win->addLayout(ch1_win);
 	fret_win->addLayout(ch2_win);
-
-
 
 	//ÉèÖÃÖ¡¹ö¶¯Ìõ
 	ch1_frame = new QLabel;
@@ -43,8 +55,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 	connect(ch1_slider, SIGNAL(valueChanged(int)), ch1_spinbox, SLOT(setValue(int)));
 	connect(ch1_spinbox, SIGNAL(valueChanged(int)), ch1_slider, SLOT(setValue(int)));
-	//ch1_slider->setEnabled(false);
-	//ch1_spinbox->setEnabled(false);
+	ch1_slider->setEnabled(false);
+	ch1_spinbox->setEnabled(false);
 
 	ch2_frame = new QLabel;
 	ch2_frame->setText("CH2");
@@ -58,14 +70,14 @@ MainWindow::MainWindow(QWidget *parent)
 	ch2_framelayout->addWidget(ch2_slider);
 	connect(ch2_slider, SIGNAL(valueChanged(int)), ch2_spinbox, SLOT(setValue(int)));
 	connect(ch2_spinbox, SIGNAL(valueChanged(int)), ch2_slider, SLOT(setValue(int)));
-	//ch2_slider->setEnabled(false);
-	//ch2_spinbox->setEnabled(false);
+	ch2_slider->setEnabled(false);
+	ch2_spinbox->setEnabled(false);
 
 
 	all_frame = new QLabel;
 	all_frame->setText("ALL");
-	all_sliper=new QSlider(Qt::Horizontal);
-	all_spinbox= new QSpinBox;
+	all_sliper = new QSlider(Qt::Horizontal);
+	all_spinbox = new QSpinBox;
 	all_spinbox->setRange(0, 130);
 	all_sliper->setRange(0, 130);
 	QHBoxLayout *all_framelayout = new QHBoxLayout;
@@ -78,7 +90,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(all_spinbox, SIGNAL(valueChanged(int)), ch2_slider, SLOT(setValue(int)));
 	connect(all_sliper, SIGNAL(valueChanged(int)), all_spinbox, SLOT(setValue(int)));
 	connect(all_spinbox, SIGNAL(valueChanged(int)), all_sliper, SLOT(setValue(int)));
-
+	all_sliper->setEnabled(false);
+	all_spinbox->setEnabled(false);
 
 	QVBoxLayout *mainlayout = new QVBoxLayout;
 	mainlayout->addWidget(title);
@@ -90,4 +103,5 @@ MainWindow::MainWindow(QWidget *parent)
 
 	cenwid->setLayout(mainlayout);
 	setCentralWidget(cenwid);
+	//setFixedSize(this->width(), this->height());
 }

@@ -27,4 +27,10 @@ private:
 	//point mean
 	QAction *addPoint;
 
+	void creatframe(void);
+	void creatmenubar(void);
+	void creattoolbar(void);
+
+
+
 };
