@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::creatframe(void)
 {
-	QImage defaultimg("default.png");
+	QImage defaultimg = creatdefault(256, 512);
 	QWidget *cenwid = new QWidget(this);
 
 
@@ -93,15 +93,40 @@ void MainWindow::creatframe(void)
 	all_sliper->setEnabled(false);
 	all_spinbox->setEnabled(false);
 
-	QVBoxLayout *mainlayout = new QVBoxLayout;
-	mainlayout->addWidget(title);
-	mainlayout->addLayout(fret_win);
-	mainlayout->addLayout(ch1_framelayout);
-	mainlayout->addLayout(ch2_framelayout);
-	mainlayout->addLayout(all_framelayout);
+	QVBoxLayout *mainfretlayout = new QVBoxLayout;
+	mainfretlayout->addWidget(title);
+	mainfretlayout->addLayout(fret_win);
+	mainfretlayout->addLayout(all_framelayout);
+	mainfretlayout->addLayout(ch1_framelayout);
+	mainfretlayout->addLayout(ch2_framelayout);
 
 
+
+	QHBoxLayout *mainlayout = new QHBoxLayout;
+
+	mainlayout->addLayout(mainfretlayout);
 	cenwid->setLayout(mainlayout);
 	setCentralWidget(cenwid);
 	//setFixedSize(this->width(), this->height());
+}
+
+QImage& MainWindow::creatdefault(int width, int height)
+{
+	QImage *grayImg;
+	int bytePerLine = (width * 3 * 8 + 31) / 8;//图像每行4字节对齐
+
+	auto graydata = new unsigned char[bytePerLine*height];//存储处理后的数据
+
+	unsigned char r, g, b;
+	for (int i = 0; i<height; i++)
+	{
+		for (int j = 0; j<width; j++)
+		{
+			graydata[i*bytePerLine + j * 3] = (unsigned char)(i/2);
+			graydata[i*bytePerLine + j * 3 + 1] = (unsigned char)j;
+			graydata[i*bytePerLine + j * 3 + 2] = 128;
+		}
+	}
+	grayImg = new QImage(graydata, width, height, bytePerLine, QImage::Format_RGB888);
+	return (*grayImg);
 }

@@ -21,7 +21,7 @@ private:
 	QLabel *title,*ch1_title, *ch2_title, *ch1_frame,*all_frame, *ch2_frame, *ch1, *ch2;
 	
 	//file menu
-	QAction *newQAction;
+	QAction *newQAction; 
 	QAction *exit;
 
 	//point mean
@@ -30,7 +30,7 @@ private:
 	void creatframe(void);
 	void creatmenubar(void);
 	void creattoolbar(void);
-
+	QImage& creatdefault(int w, int h);
 
 
 };
