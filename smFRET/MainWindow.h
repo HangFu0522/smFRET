@@ -19,7 +19,8 @@ private:
 	QSlider *ch1_slider, *ch2_slider,*all_sliper;
 	QSpinBox *ch1_spinbox, *ch2_spinbox,*all_spinbox;
 	QLabel *title,*ch1_title, *ch2_title, *ch1_frame,*all_frame, *ch2_frame, *ch1, *ch2;
-	
+
+	QMenu *filemenu, *toolmenu;
 	//file menu
 	QAction *newQAction; 
 	QAction *exit;
@@ -29,6 +30,7 @@ private:
 
 	void creatframe(void);
 	void creatmenubar(void);
+	void creatAction(void);
 	void creattoolbar(void);
 	QImage& creatdefault(int w, int h);
 

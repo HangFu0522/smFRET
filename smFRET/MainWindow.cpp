@@ -4,17 +4,19 @@
 #include <QVBoxLayout>
 #include<QPixmap>
 #include<QFileDialog>
+#include<QMenuBar>
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
 	creatframe();
+	creatAction();
+	creatmenubar();
 }
 
 void MainWindow::creatframe(void)
 {
 	QImage defaultimg = creatdefault(256, 512);
 	QWidget *cenwid = new QWidget(this);
-
 
 	title = new QLabel;
 	title->setText("FRET");
@@ -129,4 +131,16 @@ QImage& MainWindow::creatdefault(int width, int height)
 	}
 	grayImg = new QImage(graydata, width, height, bytePerLine, QImage::Format_RGB888);
 	return (*grayImg);
+}
+
+void MainWindow::creatAction(void)
+{
+	newQAction = new QAction(tr("&New"));
+}
+
+void MainWindow::creatmenubar(void)
+{
+	filemenu = menuBar()->addMenu(tr("&File"));
+	filemenu->addAction(newQAction);
+	//filemenu->addSeparator();
 }
