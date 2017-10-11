@@ -82,12 +82,6 @@ void MainWindow::creatframe(void)
 	all_framelayout->addWidget(all_frame);
 	all_framelayout->addWidget(all_spinbox);
 	all_framelayout->addWidget(all_sliper);
-	connect(all_sliper, SIGNAL(valueChanged(int)), ch1_slider, SLOT(setValue(int)));
-	connect(all_spinbox, SIGNAL(valueChanged(int)), ch1_slider, SLOT(setValue(int)));
-	connect(all_sliper, SIGNAL(valueChanged(int)), ch2_slider, SLOT(setValue(int)));
-	connect(all_spinbox, SIGNAL(valueChanged(int)), ch2_slider, SLOT(setValue(int)));
-	connect(all_sliper, SIGNAL(valueChanged(int)), all_spinbox, SLOT(setValue(int)));
-	connect(all_spinbox, SIGNAL(valueChanged(int)), all_sliper, SLOT(setValue(int)));
 	all_sliper->setEnabled(false);
 	all_spinbox->setEnabled(false);
 
@@ -131,23 +125,16 @@ QImage& MainWindow::creatdefault(int width, int height)
 void MainWindow::creatAction(void)
 {
 	openQAction = new QAction(tr("&Open"));
-	connect(openQAction, SIGNAL(triggered()), this, SLOT(openimages()));
+	connect(openQAction, SIGNAL(triggered()), this, SLOT(on_openQAction_triggered()));
 
 	Map = new QAction(tr("&Map"));
 
 	rotateL90 = new QAction(tr("&L90"));
+	connect(rotateL90, SIGNAL(triggered()), this, SLOT(on_rotateL90_triggered()));
 	rotateR90 = new QAction(tr("&R90"));
+	connect(rotateR90, SIGNAL(triggered()), this, SLOT(on_rotateR90_triggered()));
 }
-void MainWindow::openimages(void)
-{
-	QString filename = QFileDialog::getOpenFileName(this, "open FRET files", ".", "FRET files (*.tif)");
-	if (!filename.isEmpty())
-	{
-		title->setText(filename);
-		SrcImg->setEnabled(true);
-		emit sendfilename(filename);
-	}
-}
+
 
 void MainWindow::creatmenubar(void)
 {
@@ -163,8 +150,58 @@ void MainWindow::creatmenubar(void)
 	imrotate = SrcImg->addMenu(tr("&Image Rotate"));
 	imrotate->addAction(rotateL90);
 	imrotate->addAction(rotateR90);
+	SrcImg->setEnabled(false);
+
+}
 
 
-	//SrcImg->setEnabled(false);
+void MainWindow::openimages_sucess(const int num)
+{
+	SrcImg->setEnabled(true);
 
+	all_sliper->setRange(0, num - 1);
+	all_spinbox->setRange(0, num - 1);
+	ch2_spinbox->setRange(0, num - 1);
+	ch2_slider->setRange(0, num - 1);
+	ch1_spinbox->setRange(0, num - 1);
+	ch1_slider->setRange(0, num - 1);
+
+	connect(all_sliper, SIGNAL(valueChanged(int)), ch1_slider, SLOT(setValue(int)));
+	connect(all_spinbox, SIGNAL(valueChanged(int)), ch1_slider, SLOT(setValue(int)));
+	connect(all_sliper, SIGNAL(valueChanged(int)), ch2_slider, SLOT(setValue(int)));
+	connect(all_spinbox, SIGNAL(valueChanged(int)), ch2_slider, SLOT(setValue(int)));
+	connect(all_sliper, SIGNAL(valueChanged(int)), all_spinbox, SLOT(setValue(int)));
+	connect(all_spinbox, SIGNAL(valueChanged(int)), all_sliper, SLOT(setValue(int)));
+
+	connect(all_sliper, SIGNAL(valueChanged(int)), this, SIGNAL(showimagebyindex(int)));
+	connect(all_spinbox, SIGNAL(valueChanged(int)), this, SIGNAL(showimagebyindex(int)));
+
+
+	all_sliper->setEnabled(true);
+	all_spinbox->setEnabled(true);
+}
+
+
+
+void MainWindow::on_openQAction_triggered(void)
+{
+	QString filename = QFileDialog::getOpenFileName(this, "open FRET files", ".", "FRET files (*.tif)");
+	if (!filename.isEmpty())
+	{
+		title->setText(filename);
+		SrcImg->setEnabled(true);
+		emit sendfilename(filename);
+	}
+}
+
+void MainWindow::on_rotateL90_triggered(void)
+{
+	emit imageRotate(_Rotate::L90);
+	title->setText("L90");
+}
+
+void MainWindow::on_rotateR90_triggered(void)
+{
+	emit imageRotate(_Rotate::R90);
+	title->setText("R90");
 }

@@ -10,11 +10,15 @@
 #include<QPixmap>
 #include<QFileDialog>
 #include<QMenuBar>
+
+
 #include<opencv2/core/core.hpp>
 #include<opencv2/highgui/highgui.hpp>
 
 #include<string>
 
+
+#include<some_constants.h>
 class QSpinBox;
 class QLabel;
 class QAction;
@@ -29,6 +33,9 @@ public:
 
 signals:
 void sendfilename(const QString& filename);
+void imageRotate(const _Rotate& r);
+void showimagebyindex(int index);
+
 
 private:
 	QSlider *ch1_slider, *ch2_slider,*all_sliper;
@@ -54,7 +61,11 @@ private:
 	void creattoolbar(void);
 	QImage& creatdefault(int w, int h);
 
-private slots:
-	void openimages(void);
+private slots:	
+	void openimages_sucess(const int num);
 
+
+	void on_openQAction_triggered(void);
+	void on_rotateL90_triggered(void);
+	void on_rotateR90_triggered(void);
 };
