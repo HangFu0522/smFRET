@@ -1,10 +1,6 @@
 #include<MainWindow.h>
-#include <QDialog>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include<QPixmap>
-#include<QFileDialog>
-#include<QMenuBar>
+
+
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -135,10 +131,22 @@ QImage& MainWindow::creatdefault(int width, int height)
 void MainWindow::creatAction(void)
 {
 	openQAction = new QAction(tr("&Open"));
-	
+	connect(openQAction, SIGNAL(triggered()), this, SLOT(openimages()));
+
 	Map = new QAction(tr("&Map"));
 
-
+	rotateL90 = new QAction(tr("&L90"));
+	rotateR90 = new QAction(tr("&R90"));
+}
+void MainWindow::openimages(void)
+{
+	QString filename = QFileDialog::getOpenFileName(this, "open FRET files", ".", "FRET files (*.tif)");
+	if (!filename.isEmpty())
+	{
+		title->setText(filename);
+		SrcImg->setEnabled(true);
+		emit sendfilename(filename);
+	}
 }
 
 void MainWindow::creatmenubar(void)
@@ -149,5 +157,14 @@ void MainWindow::creatmenubar(void)
 
 	toolmenu = menuBar()->addMenu(tr("&Tool"));
 	toolmenu->addAction(Map);
+
+
+	SrcImg =menuBar()->addMenu(tr("&SrcImg"));
+	imrotate = SrcImg->addMenu(tr("&Image Rotate"));
+	imrotate->addAction(rotateL90);
+	imrotate->addAction(rotateR90);
+
+
+	//SrcImg->setEnabled(false);
 
 }

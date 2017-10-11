@@ -1,5 +1,5 @@
 #include "images_win.h"
-
+#include "opencv2/imgproc.hpp"
 images_win::images_win()
 {
 
@@ -9,6 +9,8 @@ void images_win::openImages(const QString& filename)
     ImageandWinName=filename.toStdString();
     cv::imreadmulti(ImageandWinName,mats,0);
     cv::namedWindow(ImageandWinName,cv::WINDOW_NORMAL|cv::WINDOW_KEEPRATIO|CV_GUI_EXPANDED);
+
+	cv::equalizeHist(mats[0], mats[0]);
     cv::imshow(ImageandWinName,mats[0]);
     cv::waitKey();
     cv::destroyWindow(ImageandWinName);
