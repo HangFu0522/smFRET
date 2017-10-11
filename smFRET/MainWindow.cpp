@@ -109,7 +109,6 @@ void MainWindow::creatframe(void)
 	mainlayout->addLayout(mainfretlayout);
 	cenwid->setLayout(mainlayout);
 	setCentralWidget(cenwid);
-	//setFixedSize(this->width(), this->height());
 }
 
 QImage& MainWindow::creatdefault(int width, int height)
@@ -135,12 +134,20 @@ QImage& MainWindow::creatdefault(int width, int height)
 
 void MainWindow::creatAction(void)
 {
-	newQAction = new QAction(tr("&New"));
+	openQAction = new QAction(tr("&Open"));
+	
+	Map = new QAction(tr("&Map"));
+
+
 }
 
 void MainWindow::creatmenubar(void)
 {
 	filemenu = menuBar()->addMenu(tr("&File"));
-	filemenu->addAction(newQAction);
-	//filemenu->addSeparator();
+	filemenu->addAction(openQAction);
+
+
+	toolmenu = menuBar()->addMenu(tr("&Tool"));
+	toolmenu->addAction(Map);
+
 }

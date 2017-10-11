@@ -23,14 +23,33 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GeneratedFiles\Debug\moc_images_win.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_MainWindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_images_win.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_MainWindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="images_win.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="images_win.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing images_win.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_OPENGL_LIB -DQT_QUICKWIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtQuickWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing images_win.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_OPENGL_LIB -DQT_QUICKWIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtQuickWidgets"</Command>
+    </CustomBuild>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
@@ -57,7 +76,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>C:\opencv\include\opencv2;C:\opencv\include\opencv;C:\opencv\include;$(IncludePath)</IncludePath>
+    <ExecutablePath>C:\opencv\bin;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\opencv\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -89,7 +110,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5Qml.lib;Qt5Quick.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5QuickWidgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_aruco330.lib;opencv_bgsegm330.lib;opencv_bioinspired330.lib;opencv_calib3d330.lib;opencv_ccalib330.lib;opencv_core330.lib;opencv_cudaarithm330.lib;opencv_cudabgsegm330.lib;opencv_cudacodec330.lib;opencv_cudafeatures2d330.lib;opencv_cudafilters330.lib;opencv_cudaimgproc330.lib;opencv_cudalegacy330.lib;opencv_cudaobjdetect330.lib;opencv_cudaoptflow330.lib;opencv_cudastereo330.lib;opencv_cudawarping330.lib;opencv_cudev330.lib;opencv_datasets330.lib;opencv_dnn330.lib;opencv_dpm330.lib;opencv_face330.lib;opencv_features2d330.lib;opencv_flann330.lib;opencv_fuzzy330.lib;opencv_highgui330.lib;opencv_imgcodecs330.lib;opencv_imgproc330.lib;opencv_img_hash330.lib;opencv_line_descriptor330.lib;opencv_ml330.lib;opencv_objdetect330.lib;opencv_optflow330.lib;opencv_phase_unwrapping330.lib;opencv_photo330.lib;opencv_plot330.lib;opencv_reg330.lib;opencv_rgbd330.lib;opencv_saliency330.lib;opencv_shape330.lib;opencv_stereo330.lib;opencv_stitching330.lib;opencv_structured_light330.lib;opencv_superres330.lib;opencv_surface_matching330.lib;opencv_text330.lib;opencv_tracking330.lib;opencv_video330.lib;opencv_videoio330.lib;opencv_videostab330.lib;opencv_xfeatures2d330.lib;opencv_ximgproc330.lib;opencv_xobjdetect330.lib;opencv_xphoto330.lib;qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5Qml.lib;Qt5Quick.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5QuickWidgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -43,6 +43,9 @@
     <CustomBuild Include="MainWindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="images_win.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\Debug\moc_MainWindow.cpp">
@@ -55,6 +58,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_images_win.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_images_win.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="images_win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

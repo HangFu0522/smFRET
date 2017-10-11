@@ -22,8 +22,8 @@ private:
 
 	QMenu *filemenu, *toolmenu;
 	//file menu
-	QAction *newQAction; 
-	QAction *exit;
+	QAction *openQAction,*exit;
+	QAction *Map,*setdefaultMap;
 
 	//point mean
 	QAction *addPoint;
