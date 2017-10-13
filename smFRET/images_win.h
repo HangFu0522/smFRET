@@ -32,7 +32,7 @@ private:
     std::string ImageandWinName;                                //图像文件和窗口的名字
     std::vector<cv::Mat> mats;                                  //保存的图像
     std::vector<FRETPoint> v_FRETPoint;                         //荧光点的框
-
+	cv::Mat getHeatMap(cv::Mat input);
 };
 
 #endif // IMAGES_WIN_H
